@@ -11,18 +11,12 @@
     "gatsby-source-trustpilot",
     "trustpilot"
   ],
-  "scripts": {
-    "test": "exit 0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/crstnre/gatsby-source-trustpilot.git"
   },
   "bugs": {
     "url": "https://github.com/crstnre/gatsby-source-trustpilot/issues"
-  },
-  "publishConfig": {
-    "@crstnre:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "got": "^11.8.2",
