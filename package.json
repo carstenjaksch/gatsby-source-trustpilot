@@ -1,0 +1,28 @@
+{
+  "name": "gatsby-source-trustpilot",
+  "description": "Source reviews from a business page on Trustpilot.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Carsten Jaksch <carsten.jaksch@icloud.com>",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-plugin-trustpilot",
+    "gatsby-source-trustpilot",
+    "trustpilot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crstnre/garsby-source-trustpilot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crstnre/gatsby-source-trustpilot/issues"
+  },
+  "dependencies": {
+    "got": "^11.8.2",
+    "jsdom": "^17.0.0"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.0.0-next.0"
+  }
+}
