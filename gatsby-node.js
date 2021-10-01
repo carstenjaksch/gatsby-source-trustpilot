@@ -4,13 +4,13 @@ const { JSDOM } = jsdom
 
 exports.pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({
-        country: Joi.string().min(2).max(2)
+        country: Joi.string().length(2)
             .default('www') // us
             .description('Language for users visiting review pages.'),
         business: Joi.string()
             .default('trustpilot.com')
             .description('Business unit to fetch from Trustpilot.'),
-        languages: Joi.string().min(2).max(2)
+        languages: Joi.string().length(2)
             .default('all')
             .description('Fetch reviews written in a specific language.'),
         stars: Joi.array().items(Joi.number().valid(1, 2, 3, 4, 5))
