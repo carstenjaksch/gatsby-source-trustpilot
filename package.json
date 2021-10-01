@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/crstnre/gatsby-source-trustpilot/issues"
   },
+  "publishConfig": {
+    "@crstnre:registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "got": "^11.8.2",
     "jsdom": "^17.0.0"
