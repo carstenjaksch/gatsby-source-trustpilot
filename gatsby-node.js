@@ -24,8 +24,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, plu
     const business = pluginOptions.business.split('.')[0]
     const ucBusiness = business[0].toUpperCase() + business.slice(1)
     const stars = pluginOptions.stars.map(star => `stars=${star}`)
-    const baseUrl = `https://${pluginOptions.country}.trustpilot.com/review/${pluginOptions.business}`
-    const url = `${baseUrl}?languages=${pluginOptions.languages}&${stars.join('&')}`
+    const baseUrl = `https://${pluginOptions.country}.trustpilot.com`
+    const url = `${baseUrl}/review/${pluginOptions.business}?languages=${pluginOptions.languages}&${stars.join('&')}`
     const data = await got(url).then(response => {
         const { document } = (new JSDOM(response.body)).window
         const children = []
