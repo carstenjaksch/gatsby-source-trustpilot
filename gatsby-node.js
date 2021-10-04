@@ -1,3 +1,4 @@
+const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const got = require('got')
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom
@@ -19,8 +20,11 @@ exports.pluginOptionsSchema = ({ Joi }) => {
     })
 }
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, pluginOptions) => {
-    const { createNode } = actions
+exports.sourceNodes = async ({
+    actions: { createNode },
+    createNodeId,
+    createContentDigest,
+}, pluginOptions) => {
     const business = pluginOptions.business.split('.')[0]
     const ucBusiness = business[0].toUpperCase() + business.slice(1)
     const stars = pluginOptions.stars.map(star => `stars=${star}`)
@@ -36,7 +40,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, plu
             const reviewData = {
                 id: `trust-${business}-review-${review.id}`,
                 name: review.querySelector('.consumer-information__name').textContent.trim(),
-                rating: review.querySelector('.star-rating img').src,
+                ratingSrc: review.querySelector('.star-rating img').src,
+                ratingAlt: review.querySelector('.star-rating img').alt,
                 location: review.querySelector('.consumer-information__location span')?.textContent, // Could be empty.
                 date: JSON.parse(review.querySelector('.review-content-header__dates script').textContent).publishedDate,
                 title: reviewLink.textContent.trim(),
@@ -83,4 +88,28 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, plu
     })
 
     return
+}
+
+exports.onCreateNode = async ({
+    actions: { createNode },
+    getCache,
+    createNodeId,
+    node,
+}, pluginOptions) => {
+    const business = pluginOptions.business.split('.')[0]
+    const ucBusiness = business[0].toUpperCase() + business.slice(1)
+
+    if (node.internal.type === `Trust${ucBusiness}Review`) {
+        const fileNode = await createRemoteFileNode({
+            url: node.ratingSrc,
+            getCache,
+            createNode,
+            createNodeId,
+            parentNodeId: node.id,
+        })
+
+        if (fileNode) {
+            node.ratingFile___NODE = fileNode.id
+        }
+    }
 }
