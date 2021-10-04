@@ -38,6 +38,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, plu
                 name: review.querySelector('.consumer-information__name').textContent.trim(),
                 rating: review.querySelector('.star-rating img').src,
                 location: review.querySelector('.consumer-information__location span')?.textContent, // Could be empty.
+                date: JSON.parse(review.querySelector('.review-content-header__dates script').textContent).publishedDate,
                 title: reviewLink.textContent.trim(),
                 href: baseUrl + reviewLink.href, // URL path only.
                 text: review.querySelector('.review-content__text')?.textContent.trim(), // Could be empty.
