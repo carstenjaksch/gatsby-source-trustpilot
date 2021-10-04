@@ -1,7 +1,7 @@
 {
   "name": "@crstnre/gatsby-source-trustpilot",
   "description": "Source reviews from a business page on Trustpilot.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "author": "Carsten Jaksch <carsten.jaksch@icloud.com>",
   "keywords": [

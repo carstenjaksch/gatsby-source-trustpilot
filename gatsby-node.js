@@ -67,7 +67,8 @@ exports.sourceNodes = async ({
 
         const businessData = {
             reviewCount: document.querySelector('.header--inline').textContent.trim(),
-            rating: document.querySelector('.star-rating img').src,
+            ratingSrc: document.querySelector('.star-rating img').src,
+            ratingAlt: document.querySelector('.star-rating img').alt,
             score: document.querySelector('.header_trustscore').textContent
         }
 
@@ -99,7 +100,10 @@ exports.onCreateNode = async ({
     const business = pluginOptions.business.split('.')[0]
     const ucBusiness = business[0].toUpperCase() + business.slice(1)
 
-    if (node.internal.type === `Trust${ucBusiness}Review`) {
+    if (
+        node.internal.type === `Trust${ucBusiness}Review` ||
+        node.internal.type === `Trust${ucBusiness}`
+    ) {
         const fileNode = await createRemoteFileNode({
             url: node.ratingSrc,
             getCache,
